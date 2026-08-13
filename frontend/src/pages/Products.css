@@ -1,0 +1,122 @@
+.products-filters {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.filter-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.products-sort {
+  max-width: 200px;
+  flex-shrink: 0;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-top: 48px;
+  flex-wrap: wrap;
+}
+
+.pagination-dots {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 4px;
+  color: var(--text-muted);
+  font-size: 14px;
+  user-select: none;
+}
+
+.pagination .btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.products-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+.products-main {
+  min-width: 0;
+}
+
+@media (max-width: 900px) {
+  .products-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .products-filters {
+    flex-direction: column;
+  }
+  .products-sort { max-width: 100%; }
+  .filter-tags { gap: 6px; }
+  .filter-tags .btn-sm { padding: 6px 12px; font-size: 11px; }
+}
+
+@media (max-width: 480px) {
+  .filter-tags { gap: 4px; }
+  .filter-tags .btn-sm { padding: 5px 10px; font-size: 10px; }
+}
+
+/* ═══ SKELETON LOADING ═══ */
+.skeleton-card {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--border-light);
+  background: var(--bg-card);
+}
+
+.skeleton-image {
+  width: 100%;
+  aspect-ratio: 1;
+  background: #f0f0f0;
+}
+
+.skeleton-info {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.skeleton-line {
+  height: 14px;
+  border-radius: 4px;
+  background: #f0f0f0;
+}
+
+.skeleton-line.short {
+  width: 40%;
+  height: 10px;
+}
+
+.skeleton-line.medium {
+  width: 60%;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}

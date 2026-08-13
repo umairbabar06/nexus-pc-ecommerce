@@ -1,0 +1,32 @@
+.admin-nav-wrap {
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 32px;
+  overflow-x: auto;
+}
+
+.admin-nav {
+  display: flex;
+  gap: 4px;
+  min-width: max-content;
+}
+
+.admin-nav-link {
+  padding: 14px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  border-bottom: 2px solid transparent;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.admin-nav-link:hover {
+  color: var(--text-primary);
+}
+
+.admin-nav-link.active {
+  color: var(--text-primary);
+  border-bottom-color: var(--accent);
+}

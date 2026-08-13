@@ -1,0 +1,96 @@
+/* ══ 404 Page ══════════════════════════════════════════════════════ */
+.nf-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 60vh;
+  padding: 60px 20px;
+  gap: 16px;
+}
+
+/* ── Glitch 404 Number ─────────────────────────────────────────── */
+.nf-glitch {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(100px, 20vw, 180px);
+  font-weight: 900;
+  line-height: 1;
+  color: var(--text-primary);
+  position: relative;
+  letter-spacing: -4px;
+  user-select: none;
+}
+
+.nf-glitch::before,
+.nf-glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.nf-glitch::before {
+  color: #ef4444;
+  animation: nf-glitch-1 2.5s infinite linear alternate-reverse;
+  clip-path: inset(0 0 60% 0);
+}
+
+.nf-glitch::after {
+  color: #3b82f6;
+  animation: nf-glitch-2 2.5s infinite linear alternate-reverse;
+  clip-path: inset(60% 0 0 0);
+}
+
+@keyframes nf-glitch-1 {
+  0%   { transform: translate(0); }
+  20%  { transform: translate(-3px, 2px); }
+  40%  { transform: translate(3px, -1px); }
+  60%  { transform: translate(-2px, 1px); }
+  80%  { transform: translate(2px, -2px); }
+  100% { transform: translate(0); }
+}
+
+@keyframes nf-glitch-2 {
+  0%   { transform: translate(0); }
+  20%  { transform: translate(3px, -2px); }
+  40%  { transform: translate(-3px, 1px); }
+  60%  { transform: translate(2px, -1px); }
+  80%  { transform: translate(-2px, 2px); }
+  100% { transform: translate(0); }
+}
+
+/* ── Text ──────────────────────────────────────────────────────── */
+.nf-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-top: 8px;
+}
+
+.nf-subtitle {
+  font-size: 16px;
+  color: var(--text-muted);
+  max-width: 400px;
+  line-height: 1.6;
+}
+
+/* ── Actions ───────────────────────────────────────────────────── */
+.nf-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* ── Responsive ────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .nf-title { font-size: 22px; }
+  .nf-subtitle { font-size: 14px; }
+  .nf-actions { flex-direction: column; width: 100%; }
+  .nf-actions .btn { width: 100%; text-align: center; }
+}

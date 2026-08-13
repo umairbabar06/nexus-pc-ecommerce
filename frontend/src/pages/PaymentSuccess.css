@@ -1,0 +1,83 @@
+/* ═══ PAYMENT SUCCESS / CANCEL ═══════════════════════════════════════════════ */
+.ps-container {
+  display: flex;
+  justify-content: center;
+  padding: 60px 20px;
+}
+
+.ps-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 48px 40px;
+  max-width: 480px;
+  width: 100%;
+  gap: 12px;
+}
+
+.ps-icon-circle {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.ps-icon-circle.success {
+  background: #10b98120;
+  color: #10b981;
+  border: 2px solid #10b981;
+}
+
+.ps-icon-circle.failed {
+  background: #ef444420;
+  color: #ef4444;
+  border: 2px solid #ef4444;
+}
+
+.ps-card h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.ps-sub {
+  color: var(--text-muted);
+  font-size: 15px;
+  line-height: 1.6;
+  max-width: 360px;
+}
+
+.ps-order-id {
+  font-size: 13px;
+  color: var(--text-muted);
+  background: var(--bg-secondary);
+  padding: 8px 16px;
+  border-radius: 6px;
+  margin-top: 4px;
+}
+
+.ps-order-id span {
+  font-family: 'Space Grotesk', monospace;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.ps-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media (max-width: 480px) {
+  .ps-card { padding: 32px 20px; }
+  .ps-actions { flex-direction: column; width: 100%; }
+  .ps-actions .btn { width: 100%; text-align: center; }
+}

@@ -1,0 +1,124 @@
+/* ── Filters ── */
+.au-filters {
+  margin-bottom: 24px;
+}
+
+.au-search-form {
+  display: flex;
+  gap: 8px;
+  max-width: 500px;
+}
+
+.au-search-form .form-input { flex: 1; }
+
+/* ── Table extras ── */
+.au-user-name { font-weight: 500; font-size: 14px; }
+.au-user-email { font-size: 13px; color: var(--text-muted); }
+
+.au-actions {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.au-delete-btn {
+  background: none;
+  border: 1px solid var(--danger);
+  color: var(--danger);
+  transition: var(--transition);
+}
+
+.au-delete-btn:hover {
+  background: var(--danger);
+  color: white;
+}
+
+/* ── Mobile ── */
+.au-mobile-list { display: none; flex-direction: column; gap: 10px; }
+
+.au-mobile-card { padding: 16px; }
+
+.au-mobile-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.au-mobile-badges {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.au-joined { font-size: 12px; color: var(--text-muted); margin-bottom: 12px; }
+
+.au-mobile-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* ── Confirm modal ── */
+.ao-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.au-confirm-modal {
+  width: 100%;
+  max-width: 420px;
+  padding: 36px;
+  text-align: center;
+}
+
+.au-confirm-modal h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.au-confirm-modal p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.au-confirm-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+/* ── Pagination ── */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .au-search-form { max-width: 100%; }
+  .admin-table-wrap { display: none; }
+  .au-mobile-list { display: flex; }
+  .au-confirm-modal { padding: 24px; }
+}
+
+@media (max-width: 480px) {
+  .au-mobile-actions { flex-direction: column; }
+  .au-mobile-actions .btn { width: 100%; }
+  .au-confirm-actions { flex-direction: column; }
+}

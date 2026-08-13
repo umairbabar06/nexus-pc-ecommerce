@@ -1,0 +1,193 @@
+/* ── Filters ── */
+.ao-filters {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.ao-search-form {
+  display: flex;
+  gap: 8px;
+  flex: 1;
+  min-width: 260px;
+}
+
+.ao-search-form .form-input { flex: 1; }
+
+.ao-status-filter {
+  max-width: 180px;
+  flex-shrink: 0;
+}
+
+/* ── Table extras ── */
+.ao-customer-name { font-weight: 500; font-size: 14px; }
+.ao-customer-email { font-size: 12px; color: var(--text-muted); }
+.ao-items-count { font-size: 13px; color: var(--text-secondary); }
+
+.ao-actions {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.ao-status-select {
+  padding: 6px 10px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  background: var(--bg-input);
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+/* ── Mobile cards ── */
+.admin-orders-mobile { display: none; flex-direction: column; gap: 10px; }
+
+.ao-mobile-card { padding: 16px; }
+
+.ao-mobile-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  align-items: center;
+}
+
+.mobile-order-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+/* ── Pagination ── */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+
+/* ── Modal ── */
+.ao-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.ao-modal {
+  width: 100%;
+  max-width: 560px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 32px;
+}
+
+.ao-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.ao-modal-header h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.ao-modal-date { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+
+.ao-modal-close {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: var(--text-muted);
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: var(--transition);
+}
+
+.ao-modal-close:hover { background: var(--bg-secondary); color: var(--text-primary); }
+
+.ao-modal-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.ao-modal-section h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.ao-modal-section p { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+
+.ao-modal-items { border-top: 1px solid var(--border-light); padding-top: 20px; margin-bottom: 24px; }
+
+.ao-modal-items h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.ao-modal-item {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-light);
+  font-size: 14px;
+}
+
+.ao-modal-item:last-child { border-bottom: none; }
+.ao-modal-item-name { flex: 1; }
+.ao-modal-item-qty { color: var(--text-muted); min-width: 30px; }
+.ao-modal-item-price { font-weight: 600; }
+
+.ao-modal-total {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  font-size: 16px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-color);
+}
+
+.ao-modal-footer { border-top: 1px solid var(--border-light); padding-top: 20px; }
+
+.ao-modal-update { display: flex; gap: 8px; margin-top: 8px; }
+.ao-modal-update .form-input { flex: 1; }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .ao-filters { flex-direction: column; }
+  .ao-status-filter { max-width: 100%; }
+  .ao-search-form { flex-direction: column; }
+  .admin-table-wrap { display: none; }
+  .admin-orders-mobile { display: flex; }
+  .ao-modal { padding: 20px; }
+  .ao-modal-body { grid-template-columns: 1fr; gap: 12px; }
+}
+
+@media (max-width: 480px) {
+  .ao-mobile-actions { flex-direction: column; align-items: stretch; }
+}
