@@ -15,8 +15,7 @@ frontend/dist
 backend/dist
 build
 
-# User Uploaded Data (Keep out of source control)
-backend/uploads
+
 
 # Logs
 logs
