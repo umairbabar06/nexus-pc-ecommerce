@@ -1,6 +1,8 @@
 # NEXUS PC — Premium PC Components E-Commerce
 
-A full-stack e-commerce platform built with the MERN stack (MongoDB, Express.js, React 19, Node.js) for selling PC components. Features an AI-powered assistant, custom PC builder with real-time hardware compatibility, and a full admin panel.
+Full-stack e-commerce platform built with the MERN stack (MongoDB, Express.js, React 19, Node.js) for selling PC components. Features an AI-powered assistant, a custom PC builder with real-time hardware compatibility checking, and a full admin panel.
+
+🔗 **Live Demo:** [nexus-pc-beta.vercel.app](https://nexus-pc-beta.vercel.app)
 
 ![Node.js](https://img.shields.io/badge/Node.js-18+-green?logo=node.js)
 ![React](https://img.shields.io/badge/React-19-blue?logo=react)
@@ -21,7 +23,6 @@ A full-stack e-commerce platform built with the MERN stack (MongoDB, Express.js,
 
 ### 🤖 AI Integration
 - **Jarvis AI Assistant** — Real-time chat powered by Gemini 2.0 Flash with Google Search grounding
-- **Auto Price Sync** — AI searches current Pakistani market prices and updates the database automatically
 - **WhatsApp Bot** — Twilio-powered auto-responses using Gemini AI
 
 ### 🖥️ Custom PC Builder
@@ -110,7 +111,7 @@ nexus-mern-backup/
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/yourusername/nexus-pc.git
+git clone https://github.com/umairbabar06/nexus-pc.git
 cd nexus-pc
 ```
 
