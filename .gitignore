@@ -15,7 +15,7 @@ frontend/dist
 backend/dist
 build
 
-
+backend/uploads
 
 # Logs
 logs

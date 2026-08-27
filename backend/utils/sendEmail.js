@@ -1,31 +1,21 @@
-const nodemailer = require('nodemailer');
+const { Resend } = require('resend');
 
 /**
- * Send an email using Nodemailer
- * Replaces PHPMailer from the PHP version
+ * Send an email using Resend (HTTP API — works on Render free tier)
+ * Replaces nodemailer/SMTP which is blocked on Render's free plan
  * @param {string} to - recipient email
  * @param {string} subject - email subject
  * @param {string} html - HTML body
  */
 const sendEmail = async ({ to, subject, html }) => {
-  const transporter = nodemailer.createTransport({
-    host: process.env.EMAIL_HOST,
-    port: parseInt(process.env.EMAIL_PORT),
-    secure: false, // true for port 465
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
-    },
-  });
+  const resend = new Resend(process.env.RESEND_API_KEY);
 
-  const mailOptions = {
-    from: process.env.EMAIL_FROM,
+  await resend.emails.send({
+    from: process.env.EMAIL_FROM || 'Nexus PC <onboarding@resend.dev>',
     to,
     subject,
     html,
-  };
-
-  await transporter.sendMail(mailOptions);
+  });
 };
 
 module.exports = sendEmail;

@@ -17,6 +17,7 @@ connectDB();
 const app = express();
 
 // ─── Middleware ───────────────────────────────────────────────
+app.set('trust proxy', 1); // Required for Render/Heroku deployments behind a proxy
 app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
 
 // Stripe webhook MUST receive raw body (before express.json)
