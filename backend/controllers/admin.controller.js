@@ -6,12 +6,8 @@ const CarouselSlide = require('../models/CarouselSlide');
 const multer = require('multer');
 const path = require('path');
 
-// ─── Multer config for image uploads (replaces Admin/upload/) ───
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, path.join(__dirname, '..', 'uploads')),
-  filename: (req, file, cb) => cb(null, `${Date.now()}-${file.originalname}`),
-});
-exports.upload = multer({ storage, limits: { fileSize: 5 * 1024 * 1024 } });
+const { upload } = require('../config/cloudinary');
+exports.upload = upload;
 
 // ─────────────────────────────────────────────────────────
 // DASHBOARD (replaces admindashboard.php)
@@ -78,7 +74,7 @@ exports.getAllProducts = async (req, res) => {
 exports.addProduct = async (req, res) => {
   try {
     const { name, price, category, description, stock, specs, isFeatured } = req.body;
-    const image = req.file ? req.file.filename : 'default.png';
+    const image = req.file ? (req.file.path || req.file.filename) : 'default.png';
 
     const product = await Product.create({
       name, price: parseFloat(price), image, category: category.toLowerCase(),
@@ -97,7 +93,7 @@ exports.addProduct = async (req, res) => {
 exports.updateProduct = async (req, res) => {
   try {
     const updateData = { ...req.body };
-    if (req.file) updateData.image = req.file.filename;
+    if (req.file) updateData.image = req.file.path || req.file.filename;
     if (updateData.specs) updateData.specs = JSON.parse(updateData.specs);
     if (updateData.price) updateData.price = parseFloat(updateData.price);
     if (updateData.stock) updateData.stock = parseInt(updateData.stock);
@@ -382,7 +378,7 @@ exports.getCarouselSlides = async (req, res) => {
 exports.addCarouselSlide = async (req, res) => {
   try {
     const { title, subtitle, link, button_text, display_order, status } = req.body;
-    const image = req.file ? req.file.filename : '';
+    const image = req.file ? (req.file.path || req.file.filename) : '';
 
     const slide = await CarouselSlide.create({
       title, subtitle, image, link, button_text,
@@ -398,7 +394,7 @@ exports.addCarouselSlide = async (req, res) => {
 exports.updateCarouselSlide = async (req, res) => {
   try {
     const update = { ...req.body };
-    if (req.file) update.image = req.file.filename;
+    if (req.file) update.image = req.file.path || req.file.filename;
 
     const slide = await CarouselSlide.findByIdAndUpdate(req.params.id, update, { new: true });
     if (!slide) return res.status(404).json({ success: false, message: 'Slide not found.' });
