@@ -6,7 +6,7 @@ const CarouselSlide = require('../models/CarouselSlide');
 const multer = require('multer');
 const path = require('path');
 
-const { upload } = require('../config/cloudinary');
+const { upload, uploadToCloudinary } = require('../config/cloudinary');
 exports.upload = upload;
 
 // ─────────────────────────────────────────────────────────
@@ -74,7 +74,15 @@ exports.getAllProducts = async (req, res) => {
 exports.addProduct = async (req, res) => {
   try {
     const { name, price, category, description, stock, specs, isFeatured } = req.body;
-    const image = req.file ? (req.file.path || req.file.filename) : 'default.png';
+    let image = 'default.png';
+
+    if (req.file) {
+      if (req.file.buffer) {
+        image = await uploadToCloudinary(req.file.buffer, 'nexus-pc-products');
+      } else {
+        image = req.file.path || req.file.filename || 'default.png';
+      }
+    }
 
     const product = await Product.create({
       name, price: parseFloat(price), image, category: category.toLowerCase(),
@@ -93,7 +101,13 @@ exports.addProduct = async (req, res) => {
 exports.updateProduct = async (req, res) => {
   try {
     const updateData = { ...req.body };
-    if (req.file) updateData.image = req.file.path || req.file.filename;
+    if (req.file) {
+      if (req.file.buffer) {
+        updateData.image = await uploadToCloudinary(req.file.buffer, 'nexus-pc-products');
+      } else {
+        updateData.image = req.file.path || req.file.filename;
+      }
+    }
     if (updateData.specs) updateData.specs = JSON.parse(updateData.specs);
     if (updateData.price) updateData.price = parseFloat(updateData.price);
     if (updateData.stock) updateData.stock = parseInt(updateData.stock);
@@ -378,7 +392,15 @@ exports.getCarouselSlides = async (req, res) => {
 exports.addCarouselSlide = async (req, res) => {
   try {
     const { title, subtitle, link, button_text, display_order, status } = req.body;
-    const image = req.file ? (req.file.path || req.file.filename) : '';
+    let image = '';
+
+    if (req.file) {
+      if (req.file.buffer) {
+        image = await uploadToCloudinary(req.file.buffer, 'nexus-pc-carousel');
+      } else {
+        image = req.file.path || req.file.filename || '';
+      }
+    }
 
     const slide = await CarouselSlide.create({
       title, subtitle, image, link, button_text,
@@ -394,7 +416,13 @@ exports.addCarouselSlide = async (req, res) => {
 exports.updateCarouselSlide = async (req, res) => {
   try {
     const update = { ...req.body };
-    if (req.file) update.image = req.file.path || req.file.filename;
+    if (req.file) {
+      if (req.file.buffer) {
+        update.image = await uploadToCloudinary(req.file.buffer, 'nexus-pc-carousel');
+      } else {
+        update.image = req.file.path || req.file.filename;
+      }
+    }
 
     const slide = await CarouselSlide.findByIdAndUpdate(req.params.id, update, { new: true });
     if (!slide) return res.status(404).json({ success: false, message: 'Slide not found.' });
