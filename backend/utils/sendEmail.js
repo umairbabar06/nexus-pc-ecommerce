@@ -1,33 +1,35 @@
-const { Resend } = require('resend');
+const nodemailer = require('nodemailer');
 
 /**
- * Send an email using Resend HTTP API
+ * Send an email using Nodemailer and Gmail SMTPS (Port 465)
  * @param {string} to - recipient email
  * @param {string} subject - email subject
  * @param {string} html - HTML body
  */
 const sendEmail = async ({ to, subject, html }) => {
-  const resend = new Resend(process.env.RESEND_API_KEY);
+  // Create a transporter using Port 465 (Secure) which is less likely to be blocked
+  const transporter = nodemailer.createTransport({
+    host: process.env.EMAIL_HOST || 'smtp.gmail.com',
+    port: 465,
+    secure: true, // Use SSL/TLS
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
+    },
+  });
 
-  // Resend free tier requires sending from onboarding@resend.dev unless a custom domain is verified
-  const fromAddress = process.env.EMAIL_FROM && process.env.EMAIL_FROM.includes('@resend.dev')
-    ? process.env.EMAIL_FROM
-    : 'Nexus PC <onboarding@resend.dev>';
+  const fromAddress = process.env.EMAIL_FROM || `Nexus PC <${process.env.EMAIL_USER}>`;
 
-  const { data, error } = await resend.emails.send({
+  const mailOptions = {
     from: fromAddress,
     to,
     subject,
     html,
-  });
+  };
 
-  if (error) {
-    console.error('Resend error details:', JSON.stringify(error, null, 2));
-    throw new Error(error.message || 'Failed to send email via Resend');
-  }
-
-  console.log('Email sent successfully via Resend, id:', data?.id);
-  return data;
+  const info = await transporter.sendMail(mailOptions);
+  console.log('Email sent successfully via Nodemailer (Port 465), id:', info.messageId);
+  return info;
 };
 
 module.exports = sendEmail;
