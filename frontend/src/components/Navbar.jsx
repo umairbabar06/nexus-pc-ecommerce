@@ -141,7 +141,6 @@ const Navbar = () => {
           <Link to="/about" onClick={closeMobile}>About</Link>
           <Link to="/contact" onClick={closeMobile}>Contact</Link>
           <Link to="/customer-service" onClick={closeMobile}>Jarvis AI</Link>
-          <Link to="/whatsapp" onClick={closeMobile}>WhatsApp</Link>
           {isAdmin && <Link to="/admin" onClick={closeMobile}>Admin</Link>}
         </div>
 

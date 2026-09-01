@@ -17,7 +17,6 @@ import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
 import Contact from './pages/Contact';
 import CustomerService from './pages/CustomerService';
-import WhatsAppChat from './pages/WhatsAppChat';
 import Wishlist from './pages/Wishlist';
 import Account from './pages/Account';
 import TrackOrder from './pages/TrackOrder';
@@ -75,7 +74,6 @@ function App() {
             {/* Contact & Customer Service */}
             <Route path="/contact" element={<Contact />} />
             <Route path="/customer-service" element={<CustomerService />} />
-            <Route path="/whatsapp" element={<WhatsAppChat />} />
 
             {/* PC Builder */}
             <Route path="/pc-builder" element={<PcBuilder />} />
