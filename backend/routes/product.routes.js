@@ -16,15 +16,15 @@ const {
 router.post('/batch-update-images', async (req, res) => {
   try {
     const Product = require('../models/Product');
-    const mapping = req.body; // { "old.jpg": "https://res.cloudinary.com/..." }
+    const mapping = req.body; // Array of { oldName, newUrl }
     let count = 0;
-    for (const [oldName, newUrl] of Object.entries(mapping)) {
-      await Product.updateMany({ image: oldName }, { $set: { image: newUrl } });
+    for (const item of mapping) {
+      await Product.updateMany({ image: item.oldName }, { $set: { image: item.newUrl } });
       count++;
     }
     const CarouselSlide = require('../models/CarouselSlide');
-    for (const [oldName, newUrl] of Object.entries(mapping)) {
-      await CarouselSlide.updateMany({ image: oldName }, { $set: { image: newUrl } });
+    for (const item of mapping) {
+      await CarouselSlide.updateMany({ image: item.oldName }, { $set: { image: item.newUrl } });
     }
     res.json({ success: true, count });
   } catch (err) {
