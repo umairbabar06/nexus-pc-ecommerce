@@ -1,18 +1,12 @@
 const ChatSession = require('../models/ChatSession');
 
 // Helper to safely load external SDKs so the server doesn't crash if they aren't installed yet
-let GoogleGenAI, twilio;
+let GoogleGenAI;
 try {
   const genaiPkg = require('@google/genai');
   GoogleGenAI = genaiPkg.GoogleGenAI;
 } catch (err) {
   console.warn('⚠️ @google/genai is not installed. AI Chat will not work until installed.');
-}
-
-try {
-  twilio = require('twilio');
-} catch (err) {
-  console.warn('⚠️ twilio is not installed. WhatsApp Chat will not work until installed.');
 }
 
 const SYSTEM_INSTRUCTION = `Your name is Jarvis. You are the AI assistant for Nexus PC, a PC building company in Pakistan.
@@ -124,34 +118,3 @@ exports.handleWebChat = async (req, res) => {
   }
 };
 
-// @route   POST /api/chat/webhook
-// @desc    Handle incoming WhatsApp messages from Twilio
-exports.handleWhatsAppWebhook = async (req, res) => {
-  try {
-    if (!twilio) {
-      return res.status(500).send('Twilio not installed');
-    }
-
-    const { From, Body } = req.body;
-    // 'From' looks like 'whatsapp:+14155238886'
-    
-    if (!From || !Body) {
-      return res.status(400).send('Invalid webhook payload');
-    }
-
-    // Generate AI response
-    const aiResponse = await generateAiResponse(From, Body);
-
-    // Use Twilio's MessagingResponse to send reply back
-    const MessagingResponse = twilio.twiml.MessagingResponse;
-    const twiml = new MessagingResponse();
-    
-    twiml.message(aiResponse);
-
-    res.set('Content-Type', 'text/xml');
-    res.send(twiml.toString());
-  } catch (error) {
-    console.error('WhatsApp Webhook Error:', error);
-    res.status(500).send('Server Error');
-  }
-};
